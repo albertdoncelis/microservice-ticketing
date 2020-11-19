@@ -16,3 +16,13 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
+    - image: albertcelis/client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.svelte'
+            dest: .
+          - src: 'src/**/*.js'
+            dest: .
