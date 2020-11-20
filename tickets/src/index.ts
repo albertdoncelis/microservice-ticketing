@@ -1,5 +1,7 @@
-import  mongoose from 'mongoose'
-import { app } from './app'
+import mongoose from 'mongoose'
+import {app} from './app'
+import {natsWrapper} from './nats-wrapper'
+import {randomBytes} from 'crypto'
 
 const start = async () => {
 
@@ -12,11 +14,14 @@ const start = async () => {
   }
 
   try {
+    await natsWrapper.connect('ticketing', randomBytes(4).toString('hex'), 'http://nats-serv:4222')
     await mongoose.connect(process.env.MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true
     })
+
+    console.log("Connected to MongoDB")
   } catch (err) {
     console.log(err)
   }
