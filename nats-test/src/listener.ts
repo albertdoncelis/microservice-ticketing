@@ -16,7 +16,10 @@ stan.on('connect', () => {
   // the default is false as soon the event received we will not received the event again.
   const options = stan.subscriptionOptions()
     .setManualAckMode(true)
-  const subscription = stan.subscribe('ticket:created', 'ticketingListener', options)
+    .setDeliverAllAvailable() // restore all the events
+    .setDurableName('account-service') // create a container named account-service and saved all the events there (mni database)
+
+  const subscription = stan.subscribe('ticket:created','queue-group-name', options)
 
   subscription.on('message', (msg: Message) => {
     console.log('message received!')
