@@ -2,12 +2,12 @@ import {Message, Stan} from "node-nats-streaming";
 import {Subjects} from "./subjects";
 
 interface Event {
-  subject: Subjects
-  data: any
+  readonly subject: Subjects
+  readonly data: any
 }
 
 export abstract class Listener<T extends Event> {
-  abstract subject: T['subject']
+  readonly abstract subject: T['subject']
   abstract queueGroupName: string
   protected actWait = 5 * 1000
 
