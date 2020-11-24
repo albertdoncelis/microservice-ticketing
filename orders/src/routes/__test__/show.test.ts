@@ -33,7 +33,7 @@ it ('returns an error if one user tries to fetch another user order', async () =
   // Create a ticket
   const ticket = Ticket.build({
     title: 'concert',
-    price: 20
+    price: 20,
   })
 
   await ticket.save()
