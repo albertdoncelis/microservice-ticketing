@@ -17,10 +17,11 @@ interface TicketModel extends mongoose.Model<TickerDoc> {
 // An interface that describe the properties
 // that a Ticket Document has
 interface TickerDoc extends mongoose.Document {
-  title: string,
-  price: number,
+  title: string
+  price: number
   userId: string
   version: number
+  orderId?: string
 }
 
 
@@ -36,6 +37,9 @@ const ticketSchema = new mongoose.Schema({
   userId: {
     type: String,
     required: true
+  },
+  orderId: {
+    type: String
   }
 }, {
   toJSON: {
