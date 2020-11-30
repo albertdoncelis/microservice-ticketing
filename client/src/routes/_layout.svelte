@@ -7,14 +7,20 @@
   }
 </script>
 <script>
-	import Nav from '../components/Nav.svelte';
-
+  import Nav from '../components/Nav.svelte'
+  import { setContext } from 'svelte';
 	export let segment;
+	export let currentUser;
+  setContext('currentUser', currentUser);
 </script>
 
 <style>
 </style>
 
 <main>
-	<slot></slot>
+  <Nav></Nav>
+  <div class="container">
+    <slot currentUser></slot>
+  </div>
+
 </main>
