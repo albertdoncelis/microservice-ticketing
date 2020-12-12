@@ -1,13 +1,13 @@
-import  mongoose from 'mongoose'
+import mongoose from 'mongoose'
 import { app } from './app'
 
 const start = async () => {
 
-  if (!process.env.JWT_KEY) {
+  if ( !process.env.JWT_KEY ) {
     throw new Error('JWT_KEY must defined')
   }
 
-  if (!process.env.MONGO_URI) {
+  if ( !process.env.MONGO_URI ) {
     throw new Error('MONGO_URI must be defined')
   }
 
