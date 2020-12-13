@@ -24,13 +24,13 @@ router.post('/api/tickets', requireAuth, [
   })
 
   await ticket.save()
-
+  console.log(ticket, 'ticket')
   await new TicketCreatedPublisher(natsWrapper.client).publish({
-    id: ticket.id,
-    title: ticket.title,
-    price: ticket.price,
-    userId: ticket.userId,
-    version: ticket.version
+    id: ticket.id || '',
+    title: ticket.title || '',
+    price: ticket.price || 0,
+    userId: ticket.userId || '',
+    version: ticket.version || 0
   });
   res.status(201).send(ticket)
 })
