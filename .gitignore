@@ -6,4 +6,5 @@ orders/node_modules
 expiration/node_modules
 payments/node_modules
 infra/k8s/secrets.yaml
+infra/k8s/secrets.yaml
 .idea
