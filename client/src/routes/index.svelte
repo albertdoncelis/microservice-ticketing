@@ -7,7 +7,7 @@
 <!--{:else}-->
 <!--  <h1>You are not signed in</h1>-->
 <!--{/if}-->
-<h1>Tickets</h1>
+<h2>Tickets</h2>
 <table class="table">
   <thead>
     <tr>
