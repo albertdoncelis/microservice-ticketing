@@ -49,9 +49,9 @@ router.post('/api/payments', requireAuth, [
 
   await payment.save()
   new PaymentCreatedPublisher(natsWrapper.client).publish({
-    id: payment.id,
-    orderId: payment.orderId,
-    stripeId: charge.id
+    id: payment.id || '',
+    orderId: payment.orderId || '',
+    stripeId: charge.id || ''
   })
 
   res.status(201).send({id: payment.id})
