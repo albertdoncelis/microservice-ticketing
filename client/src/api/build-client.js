@@ -7,8 +7,8 @@ export default (headers) => {
     // services.namespace.svc.cluster.local
     return axios.create({
       // baseURL: 'http://ingress-nginx-controller.ingress-nginx.svc.cluster.local',
-      baseURL: 'http://www.ac-ticketing-app-prod.xyz/',
-      headers
+      baseURL: process.env.INTERNAL_HOST,
+      headers: headers
     })
 
   } else {
