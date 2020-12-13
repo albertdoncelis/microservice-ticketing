@@ -10,13 +10,13 @@ interface TicketAttr {
 
 // An interface that describe that properties
 // that a Ticket model has
-interface TicketModel extends mongoose.Model<TickerDoc> {
-  build(attrs: TicketAttr): TickerDoc
+interface TicketModel extends mongoose.Model<TicketDoc> {
+  build(attrs: TicketAttr): TicketDoc
 }
 
 // An interface that describe the properties
 // that a Ticket Document has
-interface TickerDoc extends mongoose.Document {
+interface TicketDoc extends mongoose.Document {
   title: string
   price: number
   userId: string
@@ -53,10 +53,10 @@ const ticketSchema = new mongoose.Schema({
 ticketSchema.set('versionKey', 'version')
 ticketSchema.plugin(updateIfCurrentPlugin)
 
-ticketSchema.statics.build = (attrs: TicketAttr) => {
+ticketSchema.statics.build = (attrs: TicketAttr): TicketDoc => {
   return new Ticket(attrs)
 }
 
-const Ticket = mongoose.model<TickerDoc, TicketModel>('Ticket', ticketSchema)
+const Ticket = mongoose.model<TicketDoc, TicketModel>('Ticket', ticketSchema)
 
 export { Ticket }
