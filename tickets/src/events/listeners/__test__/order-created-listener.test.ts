@@ -1,9 +1,8 @@
 import {OrderCreatedListener} from "../order-created-listener";
 import {natsWrapper} from "../../../nats-wrapper";
 import {Ticket} from "../../../models/ticket";
-import {OrderCreatedEvent} from "@acelistickets/common";
+import {OrderCreatedEvent, OrderStatus} from "@acelistickets/common";
 import mongoose from 'mongoose'
-import {OrderStatus} from "../../../../../common/src";
 import {Message} from "node-nats-streaming";
 
 const setup = async () => {
