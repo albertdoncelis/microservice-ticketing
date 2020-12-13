@@ -1,11 +1,11 @@
-import {Listener, OrderCreatedEvent, Subjects} from "@acelistickets/common";
-import {Message} from "node-nats-streaming";
-import {queueGroupName} from './queue-group-name'
-import {Ticket} from "../../models/ticket";
-import {TicketUpdatedPublisher} from "../publishers/ticket-updated-publisher";
+import { Listener, OrderCreatedEvent, Subjects } from "@acelistickets/common";
+import { Message } from "node-nats-streaming";
+import { queueGroupName } from './queue-group-name'
+import { Ticket } from "../../models/ticket";
+import { TicketUpdatedPublisher } from "../publishers/ticket-updated-publisher";
 
 export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
-  queueGroupName:string = queueGroupName;
+  queueGroupName: string = queueGroupName;
   readonly subject: Subjects.OrderCreated = Subjects.OrderCreated;
 
   async onMessage(data: OrderCreatedEvent["data"], msg: Message) {
@@ -13,22 +13,22 @@ export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
     const ticket = await Ticket.findById(data.ticket.id)
 
     // if no ticket, throw error
-    if (!ticket) {
+    if ( !ticket ) {
       throw new Error('Ticket not found')
     }
 
     // mark the ticket as being reserved bt setting its orderId property
-    ticket.set({orderId: data.id})
+    ticket.set({ orderId: data.id })
     // save the ticket
     await ticket.save()
 
     await new TicketUpdatedPublisher(this.client).publish({
-      id: ticket.id,
-      price: ticket.price,
-      title: ticket.title,
-      userId: ticket.userId,
-      orderId: ticket.orderId,
-      version: ticket.version
+      id: ticket.id || '',
+      price: ticket.price || 0,
+      title: ticket.title || '',
+      userId: ticket.userId || '',
+      orderId: ticket.orderId || '',
+      version: ticket.version || 0
     })
 
     // ack the message
